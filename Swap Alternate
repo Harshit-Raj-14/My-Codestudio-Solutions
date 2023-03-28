@@ -1,0 +1,34 @@
+public class Solution {
+    
+    public static void swapAlternate(int arr[]) {
+    	for(int i=0;i<arr.length-1;i+=2){
+            arr[i]=arr[i]^arr[i+1];
+            arr[i+1]=arr[i]^arr[i+1];
+            arr[i]=arr[i]^arr[i+1];
+        }
+    }
+}
+
+
+link - https://www.codingninjas.com/codestudio/problems/swap-alternate_624941?leftPanelTab=0
+
+LOGIC:
+For swap alternate
+while(i+1<arr.length) i=i+2; move by two steps 
+
+for(int i = 0; i<size; i+=2 ) {
+        if(i+1 < size) {
+            swap(arr[i], arr[i+1]);
+        }
+    }
+
+
+public class Solution {
+    public static void swapAlternate(int arr[]) {
+        for(int i = 0; i < (arr.length - 1); i += 2) {
+            int temp = arr[i];
+            arr[i] = arr[i + 1];
+            arr[i + 1] = temp;
+        }
+    }
+}
