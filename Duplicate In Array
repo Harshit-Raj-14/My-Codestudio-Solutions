@@ -1,0 +1,36 @@
+/* TLE */
+import java.util.*;
+public class Solution {
+	public static int findDuplicate(ArrayList<Integer> arr) {
+		for(int currNum=0;currNum<arr.size();currNum++){
+			int count=0;
+			for(int i=0; i<arr.size();i++){
+			if(arr.get(i)==currNum) count++;
+			}
+			if(count>1) return currNum;		//currNum is the duplicate
+		}
+		return -1;
+	}
+}
+
+
+
+/* Dynamic Programming */
+import java.util.*;
+public class Solution {
+	public static int findDuplicate(ArrayList<Integer> arr) {
+		int count[] = new int[arr.size()];
+		for(int i=0;i<arr.size();i++){
+			count[arr.get(i)]++;
+		}
+		for(int i=0;i<count.length;i++){
+			if(count[i]>1) return i;
+		}			
+		return -1;
+	}
+}
+
+LOGIC : 
+We create a count array first which will have the frequency of each element of arraylist. Whoseever frequency is greater than 1 will be the duplicate.
+
+link - https://www.codingninjas.com/codestudio/problems/duplicate-in-array_893397
