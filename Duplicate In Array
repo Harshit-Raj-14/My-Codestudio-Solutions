@@ -33,4 +33,34 @@ public class Solution {
 LOGIC : 
 We create a count array first which will have the frequency of each element of arraylist. Whoseever frequency is greater than 1 will be the duplicate.
 
+
+/* XOR BASED APPROACH O(n) */
+import java.util.*;
+
+public class Solution {
+
+	public static int findDuplicate(ArrayList<Integer> arr) {
+		int duplicate = 0;
+		for(int i=1;i<arr.size();i++){
+			duplicate = duplicate ^ i;
+		}
+
+		for(int i=0;i<arr.size();i++){
+			duplicate = duplicate ^ arr.get(i);
+		}
+		return duplicate;
+	}
+}
+
+LOGIC - First udnerstnad that there are n elemtn sin array with size n. And we are given that elemnts range from 1 to n-1.
+So arr : 1,2,3,4,5,...X,...N-1,X (though not necessarily in order and X is our dupicate let's say)
+We know XOR proerty that : a^a = 0
+So,
+let's take 1,2,3,4,5,6,..,X,..,N-1 ----> XOR all of them ---> you get some value(call it duplicate)  ===> of course this series will contain one X
+Now iterate in arr and again XOR all of them with that value.
+finally this value will return duplicate.
+What's really happening : 
+(1^2^3^4^..^X^..^N-1) ^ (arr iteration: 1^2^3^4^...^X^...N-1^X) = return X; since there is all elments twice no and our duplicate thrice
+So, duplicate stnads alone as our answer in the calculation
+
 link - https://www.codingninjas.com/codestudio/problems/duplicate-in-array_893397
