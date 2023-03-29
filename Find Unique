@@ -1,0 +1,62 @@
+/* DYNAMIC PROGRAMMING O(n) */
+public class Solution{  
+    public static int findUnique(int[] arr){
+      int max = Integer.MIN_VALUE;
+
+      for(int i=0;i<arr.length;i++){
+        max = Math.max(max,arr[i]);
+      }
+		  int count[] = new int[max+1];
+
+      for(int i=0;i<arr.length;i++){
+        count[arr[i]]++;
+      }
+
+      for(int i=0;i<count.length;i++){
+        if(count[i]==1) return i;
+      }
+      return -1;
+    }
+}
+
+
+/* XOR method O(n)*/
+public class Solution{  
+    public static int findUnique(int[] arr){
+      int ans = 0;
+      
+      for(int i=0;i<arr.length;i++){
+        ans = ans ^ arr[i];
+      }
+      return ans;
+    }
+}
+
+LOGIC -  XOR-based approach
+The idea is to observe the fact that the XOR of two same numbers gives 0. a^a=0
+XOR of any number with zero will be the zero itself.  a^0=a
+eg : ans = 0 ^ 5 ^ 62 ^ 5 = 62
+
+Note : We are only able to use XOR becuase we exactly know there are 2m+1 elements.
+That means there are only 2 duplicates.
+The solution might have gone wrong if [2,2,2,1]. So, make sure to look out for this in the question.
+
+
+
+/* BRUTE FORCE O(n^2) */
+public class Solution{  
+    public static int findUnique(int[] arr){
+      for(int i=0;i<arr.length;i++){
+        int count = 0;
+        for(int j=0;j<arr.length;j++){
+          if(arr[i]==arr[j]) count++;
+        }
+          if(count ==1) return arr[i];
+      }
+      return -1;
+    }
+}
+LOGIC : Just count all the occurences by taking all the cases. Can be improved using DP.
+
+
+link - https://www.codingninjas.com/codestudio/problems/find-unique_625159
