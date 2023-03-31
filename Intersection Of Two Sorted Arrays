@@ -1,0 +1,63 @@
+/* Two Pointer Approach  */
+import java.util.* ;
+public class Solution{
+	public static ArrayList<Integer> findArrayIntersection(ArrayList<Integer> arr1, int n, ArrayList<Integer> arr2, int m){
+		ArrayList<Integer> list = new ArrayList<>();
+		int i=0;
+		int j=0;
+		while(i<n & j<m){
+			if(arr1.get(i).equals(arr2.get(j))){
+				list.add(arr1.get(i));
+				i++;
+				j++;
+			}
+			else if(arr1.get(i)>arr2.get(j)) j++;
+			else i++;
+		}
+		return list;
+	}
+}
+//Time Complexity: O(max(N,M))
+//Space Complexity: O(1)
+
+LOGIC : We are only able to use this because we are given arrays are in ascending order.
+Now if content of array matches we move forward in both arrays. 
+If arr1 elemnt is greater we move forward in the smaller array becuase only then we would have a chance to find a match.
+BEWARE:
+if(arr1.get(i).equals(arr2.get(j))) : use this condition because it matches content of the list at the indexes
+if(arr1.get(i)==arr2.get(j)) : Using this condition will lead to test case failure becuase it then considers the address location and the two arraylist are different objects in memory.
+You can also do this to overcome the trouble : 
+int first = arr1.get(i);
+int second = arr2.get(j);
+if(first==second){
+
+
+/* FAILED APPROACH */
+import java.util.* ;
+public class Solution{
+	public static ArrayList<Integer> findArrayIntersection(ArrayList<Integer> arr1, int n, ArrayList<Integer> arr2, int m){
+		ArrayList<Integer> list = new ArrayList<>();
+		for(int i=0;i<arr1.size();i++){
+			boolean stop = true;
+			for(int j=0;j<arr2.size() & stop==true;j++){
+				if(arr1.get(i)==arr2.get(j)) {
+					list.add(arr1.get(i));
+					stop=false;
+				}
+			}
+		}
+		return list;
+	}
+}
+
+RASON OF FAILING :
+While it does at start seem correct and we have also fixed the problem of repeating the number by disabling the inner for loop and going back to outer for loop after amtch found.
+There is this one problem.
+[1,2,2,1] & [2]
+o/p - 2,2
+expected o/p - 2
+You see iterating from the startin the second loop is down fall. 
+So, we need to come up with O(n) solution.
+
+
+link - https://www.codingninjas.com/codestudio/problems/intersection-of-2-arrays_1082149
