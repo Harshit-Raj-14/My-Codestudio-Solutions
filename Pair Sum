@@ -1,0 +1,46 @@
+/REQUIRMEENTS OF SOLUTION :
+return pair of solution
+the elemnts in pair should be in ascending order
+the pairs also should be in ascending order
+
+
+
+/*  BRUTE FORCE */
+#include <bits/stdc++.h>
+vector<vector<int>> pairSum(vector<int> &arr, int s){
+   vector<vector<int>> ans;
+   for(int i=0;i<arr.size();i++){
+      for(int j=i+1;j<arr.size();j++){
+         if(arr[i]+arr[j]==s){
+            vector<int> pair;
+            pair.push_back(min(arr[i],arr[j]));
+            pair.push_back(max(arr[i],arr[j]));
+            ans.push_back(pair);
+         }
+      }
+   }
+   sort(ans.begin(), ans.end());
+   return ans;
+}
+
+
+//you can also do this by sorting the arr first.
+
+
+
+#include <bits/stdc++.h>
+vector<vector<int>> pairSum(vector<int> &arr, int s){
+   vector<vector<int>> ans;
+   sort(arr.begin(), arr.end());
+   for(int i=0;i<arr.size();i++){
+      for(int j=i+1;j<arr.size();j++){
+         if(arr[i]+arr[j]==s){
+            vector<int> pair;
+            pair.push_back(arr[i]);
+            pair.push_back(arr[j]);
+            ans.push_back(pair);
+         }
+      }
+   }
+   return ans; 
+}
