@@ -60,4 +60,28 @@ You see iterating from the startin the second loop is down fall.
 So, we need to come up with O(n) solution.
 
 
+/* FIXING THE ABOVE FAIELD APPROACH O(n^2) TLE */
+import java.util.* ;
+public class Solution{
+	public static ArrayList<Integer> findArrayIntersection(ArrayList<Integer> arr1, int n, ArrayList<Integer> arr2, int m){
+		ArrayList<Integer> list = new ArrayList<>();
+		for(int i=0;i<arr1.size();i++){
+			boolean stop = true;
+			for(int j=0;j<arr2.size() & stop==true;j++){
+				if(arr1.get(i).equals(arr2.get(j))) {
+					list.add(arr1.get(i));
+					arr2.set(j,Integer.MIN_VALUE);
+					stop=false;
+				}
+			}
+		}
+		return list;
+	}
+}
+
+LOGIC - So, what we have done here, is update the arr2(j) with set. So, if the arr1 again goes through checking through arr2 an already checked intersection wont be compared again.
+But TC: O(n^2)
+TLE
+
+
 link - https://www.codingninjas.com/codestudio/problems/intersection-of-2-arrays_1082149
