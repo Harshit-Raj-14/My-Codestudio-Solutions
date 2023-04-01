@@ -82,6 +82,10 @@ public class Solution{
 LOGIC - So, what we have done here, is update the arr2(j) with set. So, if the arr1 again goes through checking through arr2 an already checked intersection wont be compared again.
 But TC: O(n^2)
 TLE
+Though, we can still make it a bit more efficient by adding a condition in 2nd for loop:
+if(arr1,get(i)<arr2.get(j)) stop = false;
+The array need not go further becuase it is non-decreasing and the possiblity of existing equal already passed.
+Still gives TLE.
 
 
 link - https://www.codingninjas.com/codestudio/problems/intersection-of-2-arrays_1082149
