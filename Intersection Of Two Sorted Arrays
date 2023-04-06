@@ -32,6 +32,32 @@ int second = arr2.get(j);
 if(first==second){
 
 
+/* USING HASHMAP */
+import java.util.* ;
+public class Solution{
+	public static ArrayList<Integer> findArrayIntersection(ArrayList<Integer> arr1, int n, ArrayList<Integer> arr2, int m){
+		HashMap<Integer,Integer> map = new HashMap<>();
+		ArrayList<Integer> ans = new ArrayList<>();
+		for(int i=0;i<arr1.size();i++){	// Adding the elements of the first array in map along with their frequency count
+			if(map.containsKey(arr1.get(i))) 
+			map.put(arr1.get(i),1+map.get(arr1.get(i)));
+			else map.put(arr1.get(i),1);
+		}
+		for(int i=0;i<arr2.size();i++){
+			if(map.containsKey(arr2.get(i))){
+				ans.add(arr2.get(i));
+				map.put(arr2.get(i),map.get(arr2.get(i))-1);
+            			if (map.get(arr2.get(i)) == 0) map.remove(arr2.get(i));		//Deleting the element if it's frequency is 0.
+			}
+		}
+		return ans;
+	}
+}
+
+LOGIC - using ahshet will not work since it will only give back unique elemtns. So, we start with hashmap storing the vlaue inarr1 as key and their count as value.
+Next we start matching them through arr2 and exhaust their count at the same time adding them to ans. Once the count hits 0, make sure to dlete the elemtn becuase then it might go to -1 form the first 'if' of the second loop.
+
+
 /* FAILED APPROACH */
 import java.util.* ;
 public class Solution{
