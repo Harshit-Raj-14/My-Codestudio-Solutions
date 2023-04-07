@@ -1,4 +1,4 @@
-/REQUIRMEENTS OF SOLUTION :
+//REQUIRMEENTS OF SOLUTION :
 return pair of solution
 the elemnts in pair should be in ascending order
 the pairs also should be in ascending order
@@ -26,8 +26,7 @@ vector<vector<int>> pairSum(vector<int> &arr, int s){
 
 //you can also do this by sorting the arr first.
 
-
-
+/* C++ SOLUTION */
 #include <bits/stdc++.h>
 vector<vector<int>> pairSum(vector<int> &arr, int s){
    vector<vector<int>> ans;
@@ -43,4 +42,24 @@ vector<vector<int>> pairSum(vector<int> &arr, int s){
       }
    }
    return ans; 
+}
+
+
+/* JAVA SOLUTION */
+public class Solution{
+    public static List<int[]> pairSum(int[] arr, int s) {
+        Arrays.sort(arr);
+        List <int[]> ans = new ArrayList();
+        for(int i=0;i<arr.length;i++){
+            for(int j=i+1;j<arr.length;j++){
+                if(arr[i]+arr[j]==s){
+                    int[] pair = new int[2];
+                    pair[0] = Math.min(arr[i],arr[j]);
+                    pair[1] = Math.max(arr[i],arr[j]);
+                    ans.add(pair);
+                }
+            }
+        }
+        return ans;
+    }
 }
