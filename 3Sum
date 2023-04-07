@@ -1,0 +1,77 @@
+/* BRUTE FORCE C++ O(n^3) */
+#include <bits/stdc++.h> 
+vector<vector<int>> findTriplets(vector<int>arr, int n, int K) {
+	//Set to keep the track of visited triplets
+    set<vector<int>>visited;
+	vector<vector<int>> ans;
+	for(int i=0;i<n-2;i++){
+		for(int j=i+1;j<n-1;j++){
+			for(int k=j+1;k<n;k++){
+				if(arr[i]+arr[j]+arr[k]==K){
+					vector<int> triplet;
+					triplet.push_back(arr[i]);
+					triplet.push_back(arr[j]);
+					triplet.push_back(arr[k]);
+					// Sorting the triplet track distinct triplets.
+                  sort(triplet.begin(), triplet.end());
+                    if (visited.find(triplet) == visited.end()) {
+                        ans.push_back(triplet);
+                        visited.insert(triplet);
+                    }
+				}
+			}
+		}
+	}
+	return ans;
+}
+
+LOGIC --- We need to find triplet using brute force by iteerating. But also keep track that we do not count triplets again as asked us not to do in the question
+
+
+
+
+
+/* TWO POINTER APPROACH O(n^2) C++ */
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+
+	public static ArrayList<ArrayList<Integer>> findTriplets(int[] arr, int n, int K)  {
+		ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
+		for(int i=0;i<n-2;i++){
+			for(int j=i+1;j<n-1;j++){
+				for(int k=j+1;k<n;k++){
+					if(arr[i]+arr[j]+arr[k]==K){
+						ArrayList<Integer> list = new ArrayList<>();
+						list.add(arr[i]);
+						list.add(arr[j]);
+						list.add(arr[k]);
+						ans.add(list);
+					}
+				}
+			}
+		}
+		return ans;
+
+	}
+}
+
+
+LOGIC ---  Two pointers
+Sort the array in non-decreasing order because after the array is sorted, we don’t have to process the same elements multiple times and hence we don’t have to explicitly keep track for distinct triplets. 
+The other advantage of sorting the array is that if we have some value and we require a greater value, we know we have to look in only a single direction.
+Now since we want triplets such that x + y + z = ‘K’, we have x+ y =  ‘K’ - z and now we can fix z as arr[i]. So we want to find the sum of two numbers x and y as ‘K’ - arr[i] in the array.
+Let us assume that we are the ith index of the array and initialise variable target to ‘K’ - ‘ARR[i]’.
+So now we just need to find two elements x, y such that target = x + y.
+We will use two pointers, one will start from i+1, and the other will start from the end of the array.
+Let the two pointers be ‘FRONT’ and ‘BACK’, where ‘FRONT’ = i + 1 and ‘BACK’ = n - 1. Let ‘SUM’ = x + y, where x = ‘ARR[FRONT]’ and y = ‘ARR[BACK]’. We have to find the triplets such that ‘TARGET’ = ‘SUM’.
+While ‘FRONT’ < ‘BACK’, there will be 3 cases:
+     if ('SUM' < ‘TARGET’), we will have to increase the sum and hence increment front pointer as we have sorted the array and to increase the sum, the greater element will always be present after the front index.
+     Else if ('SUM' > ‘TARGET’), we will have to decrease the sum and hence decrease the ‘BACK’ pointer. The reason for this is exactly similar to the above point
+     Else print the triplet and since we want distinct triplets,  do the following.
+          Increment the front pointer until ‘ARR[FRONT]’ = x and ‘FRONT’ < ‘BACK’.
+          Decrement the back pointer until ‘ARR[BACK]’ = y and ‘FRONT’ < ‘BACK’.
+While ‘ARR[i]’ = ‘ARR[i+1]’, keep on incrementing i, this will automatically ensure that we are only finding distinct triplets.
+
+Time Complexity: O(n^2)
