@@ -32,31 +32,60 @@ LOGIC --- We need to find triplet using brute force by iteerating. But also keep
 
 
 /* TWO POINTER APPROACH O(n^2) C++ */
-
-import java.util.* ;
-import java.io.*; 
 public class Solution {
+	public static ArrayList<ArrayList<Integer>> findTriplets(int[] arr, int n, int k) {
+		ArrayList <ArrayList<Integer>> ans = new ArrayList<>();
+		// Sorting the arraylist.
+		Arrays.sort(arr);
 
-	public static ArrayList<ArrayList<Integer>> findTriplets(int[] arr, int n, int K)  {
-		ArrayList<ArrayList<Integer>> ans = new ArrayList<>();
-		for(int i=0;i<n-2;i++){
-			for(int j=i+1;j<n-1;j++){
-				for(int k=j+1;k<n;k++){
-					if(arr[i]+arr[j]+arr[k]==K){
-						ArrayList<Integer> list = new ArrayList<>();
-						list.add(arr[i]);
-						list.add(arr[j]);
-						list.add(arr[k]);
-						ans.add(list);
+		for (int i = 0; i < n; i++) {
+			int target = k-arr[i];
+			int front = i + 1;
+			int back = n - 1;
+
+			while (front < back) {
+				int sum = arr[front] + arr[back];
+
+				// Finding answer which starts from arr[i].
+				if (sum < target) {
+					front++;
+				}
+				else if (sum > target) {
+					back--;
+				}
+				else {
+					int x = arr[front];
+					int y = arr[back];
+
+					ArrayList<Integer> list = new ArrayList<>();
+
+					list.add(arr[i]);
+					list.add(arr[front]);
+					list.add(arr[back]);
+					ans.add(list);
+
+					// Incrementing front pointer until we reach a different number.
+					while (front < back && arr[front] == x) {
+						front++;
+					}
+
+					// Decrementing last pointer until we reach a different number.
+					while (front < back && arr[back] == y) {
+						back--;
 					}
 				}
 			}
+			// Ensuring that we don't encounter duplicate values for arr[i].
+			while (i + 1 < n && arr[i] == arr[i + 1]) {
+				i++;
+			}
 		}
 		return ans;
-
 	}
 }
 
+    Time Complexity: O(n^2)
+    Space Complexity: O(1)
 
 LOGIC ---  Two pointers
 Sort the array in non-decreasing order because after the array is sorted, we don’t have to process the same elements multiple times and hence we don’t have to explicitly keep track for distinct triplets. 
@@ -74,4 +103,4 @@ While ‘FRONT’ < ‘BACK’, there will be 3 cases:
           Decrement the back pointer until ‘ARR[BACK]’ = y and ‘FRONT’ < ‘BACK’.
 While ‘ARR[i]’ = ‘ARR[i+1]’, keep on incrementing i, this will automatically ensure that we are only finding distinct triplets.
 
-Time Complexity: O(n^2)
+
