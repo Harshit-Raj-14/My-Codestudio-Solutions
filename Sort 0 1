@@ -1,0 +1,7 @@
+/* INBUILT SORTING O(nlogn) */
+public class Solution {  
+
+    public static void sortZeroesAndOne(int[] arr) {
+    	Arrays.sort(arr);
+    }
+}
