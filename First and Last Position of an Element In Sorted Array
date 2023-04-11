@@ -83,5 +83,10 @@ public class Solution {
 IDEA -
 Given sorted array so need to use that fact.
 sorted array -> search -> O(logn) -> Binary Search
+
+
+FOLLOW UP QUESTION : FIND THE TOTAL NO. OF OCCURRENCES of K IN THE ABOVE PROBLEM?
+Using binary search, and givne sorted array:
+total occurences = (last index position - first index position) +1
     
     
