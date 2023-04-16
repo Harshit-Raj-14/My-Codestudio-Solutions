@@ -1,0 +1,39 @@
+/* KADANE'S ALGORITHM */
+public static long maxSubarraySum(int[] nums, int n) {
+		long sum = 0;	//empty subarrays allowed so maxSum for them and negative arrays is 0
+		long currSum=0;
+		for(int i=0;i<nums.length;i++){
+			if(currSum<0) currSum=0;
+			currSum+=nums[i];
+			sum=Math.max(currSum,sum);
+		}
+		return sum;
+
+	}
+  
+  //Note :Also see the return type make changes accordingly
+  
+  
+  FOLLOW UP QUESTION - PRINT THE MAXSUBARRAY
+  public static long maxSubarraySum(int[] nums, int n) {
+		long sum = 0;	//empty subarrays allowed so maxSum for them and negative arrays is 0
+		long currSum=0;
+		int start=-1;
+		int end=-1;
+		for(int i=0;i<nums.length;i++){
+			if(currSum<0) currSum=0;
+			if(currSum==0) start=i;
+			currSum+=nums[i];
+			sum=Math.max(currSum,sum);
+			if(sum<=currSum){
+				sum=currSum;
+				int ansStart=start;
+				int ansEnd=i;
+			}
+		}
+		return sum;
+
+	}
+  
+  //We can use ansStart and ansEdn to get the subarray, which are the starting and ending idnexes of maxSubarray
+  
