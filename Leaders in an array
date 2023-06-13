@@ -1,0 +1,12 @@
+public static ArrayList<Integer> findLeaders(ArrayList<Integer> elements, int n) {
+		ArrayList<Integer> list = new ArrayList<>();
+		int currMax = Integer.MIN_VALUE;
+		for(int i=elements.size()-1;i>=0;i--){
+			if(elements.get(i)>currMax){
+				list.add(elements.get(i));
+				currMax=elements.get(i);
+			}
+		}
+		Collections.reverse(list);	//to get original configurtion same to arr
+		return list;
+	}
