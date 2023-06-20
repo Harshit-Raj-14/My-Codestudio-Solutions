@@ -1,0 +1,70 @@
+import java.util.* ;
+
+class Solution {
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n=sc.nextInt();
+		int nums[] = new int[n];
+		for(int i=0;i<nums.length;i++){
+			nums[i]=sc.nextInt();
+		}
+		int k=sc.nextInt();
+		while(k-->0){
+			int first = nums[0];
+			for(int i=0;i<nums.length-1; i++){
+				nums[i] = nums[i+1];
+			}
+			nums[nums.length-1] = first;
+		}
+		for(int i=0;i<nums.length;i++){
+			System.out.print(nums[i]+" ");
+		}
+		sc.close();
+	}
+}
+
+LOGIC---
+We rotate the array K times where in each iteration we rotate the array by 1.
+Rotating the array once can be done by changing input[i] to input[i+1] and appending the first character to the end.
+
+
+
+
+/* ANOTHER APPROACH */
+import java.util.* ;
+class Solution {	
+	public static void main(String args[]) {
+		Scanner sc = new Scanner(System.in);
+		int n=sc.nextInt();
+		int nums[] = new int[n];
+		for(int i=0;i<nums.length;i++){
+			nums[i]=sc.nextInt();
+		}
+		int k=sc.nextInt();
+		// storing 1st k elements in temporary array
+		int temp[] = new int[k];
+		for(int i=0;i<temp.length;i++){
+			temp[i]=nums[i];
+		}
+		// shifting remaining elements of the array
+		for(int i=k;i<nums.length;i++){
+			nums[i-k]=nums[i];
+		}
+		//storing back the k elements to the orignal array
+		for(int i=0;i<temp.length;i++){
+			nums[n-k+i]=temp[i];
+		}
+		//printing the array
+		for(int i=0;i<nums.length;i++){
+			System.out.print(nums[i]+" ");
+		}
+		sc.close();
+	}
+}
+
+
+LOGIC---
+We note that rotating an Array K times is just placing the first K elements at the end and bringing forward rest of the elements.
+So we store the first K elements in a temporary array.
+We then bring the remaining N - K elements at the front by moving each of them K places ahead.
+Finally we append the initial first K elements at the end to get the rotated Array.
