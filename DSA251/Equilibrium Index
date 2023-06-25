@@ -1,0 +1,64 @@
+/* O(n) SOLUTION PREFFIX SUM ARRAY */
+public class Solution {
+	public static int arrayEquilibriumIndex(int[] arr){
+		int sumL[]=new int[arr.length];	//prefix sum array from left
+		int sumR[]=new int[arr.length];	//prefix sum array from right
+		sumL[0]=0;	//to not include the index at that point to conveniently get eq_index
+		sumR[arr.length-1]=0;
+		for(int i=1;i<sumL.length;i++){
+			sumL[i]=arr[i-1]+sumL[i-1];
+		}
+		for(int j=sumR.length-2; j>=0;j--){
+			sumR[j]=arr[j+1]+sumR[j+1];
+		}  	
+		for(int i=0;i<arr.length;i++){
+			if(sumL[i]==sumR[i]) return i;	//we got our index where sumL=sumR
+		}
+		return -1;
+	}
+}
+
+LOGIC---
+We make one prefix sum array sumL
+and one suffix sum array sumR
+the index where sumL=sumR not including that index is our eq_index
+
+
+/* O(n) SOLUTION */
+public class Solution {
+	public static int arrayEquilibriumIndex(int[] arr){  
+		int totalsum=0;
+		for(int i=0;i<arr.length;i++){
+			totalsum+=arr[i];
+		}
+		int sumL=0;
+		for(int i=0;i<arr.length;i++){
+			if(i!=0) sumL+=arr[i-1];
+			if(2*sumL+arr[i]==totalsum) return i;
+		}
+		return -1;
+	}
+}
+
+LOGIC ---
+sumL + eq_index + sumR = totalsum
+For equilibrium or pivot index we need sumL=sumR
+totalsum= 2*sumL+eq_index
+
+
+
+/* O(n^2) SOLUTION TLE */
+public class Solution {
+	public static int arrayEquilibriumIndex(int[] arr){  
+		int sumL=0;
+		for(int i=0;i<arr.length;i++){
+			int sumR=0;
+			for(int j=i+1;j<arr.length;j++){
+				sumR+=arr[j];
+			}
+			if(sumL==sumR) return i;
+			sumL+=arr[i];
+		}
+		return -1;
+	}
+}
