@@ -1,0 +1,18 @@
+public class Solution {
+	public static boolean isPossible(int[] arr, int n) {
+		//if(arr.length==1) return true;
+		int count=0;
+		for(int i=0;i<arr.length;i++){
+			if(i+1<arr.length && arr[i]>arr[i+1]){
+				count++;
+				if(i-1>=0 && i+2<arr.length && arr[i-1]<=arr[i] && arr[i-1]>arr[i+1] && arr[i+1]<=arr[i+2] && arr[i]>arr[i+2]) return false;    //YABY scenario plotted on graph
+			}
+		}
+		if(count>1) return false;	
+		else return true;
+	}
+}
+
+
+See this article for second line explanation of YABY scenario on graph - https://dev.to/seanpgallivan/solution-non-decreasing-array-1m5c
+ 
