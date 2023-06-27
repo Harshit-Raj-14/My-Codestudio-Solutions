@@ -1,3 +1,19 @@
+
+
+LOGIC ----
+TC - O(n), SC - O(n)
+How to think of this approach? If we were using a hashset we used O(n) space. What we were doing was checking which number existed and which number not by storing them somewhere else.
+But what if we are able to make the array such that the elment goes there where they should be. The elements come at their indexes. And we are to make changes in the array itself to do so. 
+Hence we can acheive O(1).
+
+So, we are going to put the number in their respective position. So, 1 will got to 0 index.(our positive numbers start from 1) 
+2 will go to 1st index and so on.
+Formula will be to swap the element we start from with the element of which index it should be.
+swap(nums[i], nums[nums[i]-1])
+
+
+
+
 /* USING HASHSET TC-O(n) & SC-O(n) */
 public class Solution {
 	public static int firstMissing(int[] arr, int n) {
@@ -22,4 +38,35 @@ That will be our first misisng positive
 Note - It will fail one test case becuase of SC
 
 
-/* BRUTE FORCE O(N^2) */
+/* SEGRGATION */ 
+public class Solution {
+	public static int firstMissing(int[] arr, int n) {
+		int i=0;
+		int j=arr.length-1;
+		//move all -ve eleemnts to left of array and all +ve to right - segregate now our array search becmae just half since all positve moved to other side
+		//also where j ends will be the point from hwere -ve would start and the =ve starts from 0 so we have also got our range
+		while(i<j){
+			if(arr[i]<=0){
+				int temp=arr[i];
+				arr[i]=arr[j];
+				arr[j]=temp;
+				j--;
+			}
+			else i++;	//we don't know whether the element we are swapping above is positive or not so check again
+		}
+		int count[] = new int[100001];
+		for(int k=0;k<i;k++){
+			count[arr[i]]++;
+		}
+		for(int k=0;i<i;k++){
+			if()
+		}
+
+		for(int k=0; k<arr.length; k++){
+			System.out.print(arr[k]+", ");
+		}	
+		System.out.println();
+		return -1;
+	}
+}
+
