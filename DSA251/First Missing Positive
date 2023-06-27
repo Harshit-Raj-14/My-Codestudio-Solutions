@@ -1,0 +1,25 @@
+/* USING HASHSET TC-O(n) & SC-O(n) */
+public class Solution {
+	public static int firstMissing(int[] arr, int n) {
+		HashSet<Integer> set = new HashSet<>();
+		int max=0;
+		for(int i=0;i<arr.length;i++){
+			set.add(arr[i]);
+			max=Math.max(max, arr[i]);
+		}	
+		for(int i=1;i<=max+1;i++){
+			if(!set.contains(i)) return i;
+		}
+		return -1;
+	}
+}
+
+LOGIC --- 
+Put all numbers of array in hashset
+Find amx of array
+Now iterate from 1 to max and check which number is not in set.
+That will be our first misisng positive
+Note - It will fail one test case becuase of SC
+
+
+/* BRUTE FORCE O(N^2) */
