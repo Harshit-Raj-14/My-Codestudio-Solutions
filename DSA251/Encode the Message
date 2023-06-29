@@ -13,7 +13,7 @@ public class Solution {
 			}
 			else count++;
 		}
-		sb.append(curr);	//the above loop conditions will not appedn the alst characte rna dits frequency so need to append it at the end
+		sb.append(curr);	//the above loop conditions will not append the last character and its frequency so need to append it at the end
 		sb.append(count);
 		return sb.toString();
 	}
