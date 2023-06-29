@@ -1,7 +1,24 @@
+/* USING SWAPPING CYCLE SORT IN-PLACE HASHING SC-O(1) , TC-O(n) */
+public class Solution {
+	public static int firstMissing(int[] nums, int n) {
+		for(int i=0;i<nums.length;i++){
+			int element=nums[i];
+			int chair=element-1;	//chair where elemtn has to sit like 1 will sit on 0
+			if(nums[i]>0 && nums[i]<=nums.length && element!=nums[chair]){	//question condition - is nums[i] sititng on his chair
+				int temp=element;
+				nums[i]=nums[chair];	//nums[i]=nums[chair];
+				nums[chair] = temp;
+				i--; 	//right now we send the current elemnt to its correct chair, but we again need to recheck for the new elemnt which came at i
+			}
+		}	
+		for(int i=0;i<nums.length;i++){
+			if(i+1!=nums[i]) return i+1;
+		}	
+		return nums.length+1;
+	}
+}
 
-
-LOGIC ----
-TC - O(n), SC - O(n)
+LOGIC ---
 How to think of this approach? If we were using a hashset we used O(n) space. What we were doing was checking which number existed and which number not by storing them somewhere else.
 But what if we are able to make the array such that the elment goes there where they should be. The elements come at their indexes. And we are to make changes in the array itself to do so. 
 Hence we can acheive O(1).
@@ -12,25 +29,28 @@ Formula will be to swap the element we start from with the element of which inde
 swap(nums[i], nums[nums[i]-1])
 
 
-
-
-/* USING HASHSET TC-O(n) & SC-O(n) */
-public class Solution {
-	public static int firstMissing(int[] arr, int n) {
-		HashSet<Integer> set = new HashSet<>();
-		int max=0;
-		for(int i=0;i<arr.length;i++){
-			set.add(arr[i]);
-			max=Math.max(max, arr[i]);
-		}	
-		for(int i=1;i<=max+1;i++){
-			if(!set.contains(i)) return i;
-		}
-		return -1;
-	}
+/* PARTIALLY ACCEPTED SOLUTION HASHSET SC-O(n) , TC-O(n) */
+class Solution {
+    public int firstMissingPositive(int[] nums) {
+        HashSet<Integer> set = new HashSet<>();
+        //Put all elements in hashset
+        for(int i=0;i<nums.length;i++){
+            set.add(nums[i]);
+        }
+        //find max in nums array
+        int max = 0;  //initialise max wiht 0 since we may get only negative array elements, so max would come -ve iff you write max=Integer.MIN_VALUE;
+        for(int i=0;i<nums.length;i++){
+            max = Math.max(nums[i],max);
+        }
+        //iterate from 1 to max to see which is not first present in set
+        for(int i=1;i<=max;i++){
+            if(!set.contains(i)) return i;
+        }
+        return max+1;
+    }
 }
-
-LOGIC --- 
+LOGIC ----
+TC - O(n), SC - O(n)
 Put all numbers of array in hashset
 Find amx of array
 Now iterate from 1 to max and check which number is not in set.
@@ -39,34 +59,3 @@ Note - It will fail one test case becuase of SC
 
 
 /* SEGRGATION */ 
-public class Solution {
-	public static int firstMissing(int[] arr, int n) {
-		int i=0;
-		int j=arr.length-1;
-		//move all -ve eleemnts to left of array and all +ve to right - segregate now our array search becmae just half since all positve moved to other side
-		//also where j ends will be the point from hwere -ve would start and the =ve starts from 0 so we have also got our range
-		while(i<j){
-			if(arr[i]<=0){
-				int temp=arr[i];
-				arr[i]=arr[j];
-				arr[j]=temp;
-				j--;
-			}
-			else i++;	//we don't know whether the element we are swapping above is positive or not so check again
-		}
-		int count[] = new int[100001];
-		for(int k=0;k<i;k++){
-			count[arr[i]]++;
-		}
-		for(int k=0;i<i;k++){
-			if()
-		}
-
-		for(int k=0; k<arr.length; k++){
-			System.out.print(arr[k]+", ");
-		}	
-		System.out.println();
-		return -1;
-	}
-}
-
