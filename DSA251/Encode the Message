@@ -1,0 +1,41 @@
+/* ACCEPTED SOLUTION O(n) */
+public class Solution {
+	public static String encode(String message) {
+		StringBuilder sb = new StringBuilder("");
+		char curr=message.charAt(0);
+		int count=0;
+		for(int i=0;i<message.length();i++){
+			if(curr!=message.charAt(i)){
+				sb.append(curr);
+				sb.append(count);
+				curr=message.charAt(i);
+				count=1;
+			}
+			else count++;
+		}
+		sb.append(curr);	//the above loop conditions will not appedn the alst characte rna dits frequency so need to append it at the end
+		sb.append(count);
+		return sb.toString();
+	}
+}
+
+
+/* ELEGANT better way to write SOLUTION */
+public class Solution {
+    public static String encode(String message) {
+        int n = message.length();
+        StringBuilder encodedMessage = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            char curChar = message.charAt(i);
+            int charFreq = 1;
+            while (i + 1 < n && message.charAt(i + 1) == curChar) {
+                i++;
+                charFreq++;
+            }
+            encodedMessage.append(curChar);
+            encodedMessage.append("" + charFreq);
+        }
+
+        return encodedMessage.toString();
+    }
+}
