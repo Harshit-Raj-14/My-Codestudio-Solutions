@@ -1,0 +1,18 @@
+public class Solution {
+    static int[] recurs(int n, int[] arr){
+        if(n<=0) return arr;
+        int i=n-1;
+        arr[i]=n;
+        return recurs(n-1, arr);
+    }
+
+    public static int[] printNos(int x) {
+        int[] arr = new int[x];
+        return recurs(x, arr);
+    }
+}
+
+/*
+TC: O( n )
+SC: O( n )
+*/
